@@ -23,7 +23,7 @@ export default function UsersPage() {
   const renderedUsers = data?.map((user: User) => {
     return (
       <div key={user.id} className="my-3">
-        Username:{" "}
+        Username:
         <Link to={`/users/${user.id}`} className="text-blue-300">
           {user.username}
         </Link>
