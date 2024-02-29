@@ -1,4 +1,5 @@
 import { useGetUsersQuery } from "../store";
+import { Link } from "react-router-dom";
 
 interface User {
   id: number;
@@ -21,15 +22,14 @@ export default function UsersPage() {
 
   const renderedUsers = data?.map((user: User) => {
     return (
-      <div key={user.id}>
-        {user.full_name}
-        {user.email}
-        {user.username}
-        {user.contact_number}
-        {user.is_admin}
+      <div key={user.id} className="my-3">
+        Username:{" "}
+        <Link to={`/users/${user.id}`} className="text-blue-300">
+          {user.username}
+        </Link>
       </div>
     );
   });
 
-  return <div>{renderedUsers}</div>;
+  return <div className="mt-10 ml-10">{renderedUsers}</div>;
 }

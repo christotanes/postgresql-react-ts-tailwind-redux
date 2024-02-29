@@ -18,8 +18,8 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
   }),
-  endpoints: (builder) => ({
-    getUsers: builder.query<UsersResponse, void>({
+  endpoints: (build) => ({
+    getUsers: build.query<UsersResponse, void>({
       query: () => ({
         url: `/users`,
         method: "GET",
