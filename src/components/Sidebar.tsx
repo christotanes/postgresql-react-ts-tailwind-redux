@@ -2,14 +2,9 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const links = [
-    {
-      label: "Login",
-      path: "/login",
-    },
-    {
-      label: "Logout",
-      path: "/",
-    },
+    { label: "Users", path: "/users" },
+    { label: "Login", path: "/login" },
+    { label: "Logout", path: "/" },
   ];
 
   const renderedLinks = links.map((link) => {
@@ -24,7 +19,7 @@ export default function Sidebar() {
     );
   });
   return (
-    <section className="flex flex-col w-20 h-20 mx-10 mt-10">
+    <section className="flex flex-col h-screen mx-10 mt-10">
       {renderedLinks}
     </section>
   );

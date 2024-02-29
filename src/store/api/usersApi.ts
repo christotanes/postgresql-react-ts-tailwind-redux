@@ -11,23 +11,23 @@ interface User {
   is_admin: boolean;
 }
 
+type UsersResponse = User[];
+
 export const userApi = createApi({
   reducerPath: "users",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
   }),
-  endpoints(builder) {
-    return {
-      getUsers: builder.query<User, string>({
-        query: () => {
-          return {
-            url: "/users",
-            method: "GET",
-          };
-        },
+  endpoints: (builder) => ({
+    getUsers: builder.query<UsersResponse, void>({
+      query: () => ({
+        url: `/users`,
+        method: "GET",
       }),
-    };
-  },
+      transformResponse: (rawResponse: UsersResponse) => {
+        return rawResponse;
+      },
+    }),
+  }),
 });
-
 export const { useGetUsersQuery } = userApi;
