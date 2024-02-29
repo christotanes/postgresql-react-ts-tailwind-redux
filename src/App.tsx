@@ -1,12 +1,17 @@
 import { useGetUsersQuery } from "./store";
+// import Sidebar from "./components/Sidebar";
 
 function App() {
   const response = useGetUsersQuery("user");
 
   console.log(response);
 
-  // console.log(import.meta.env.VITE_API_URL);
-  return <h1 className="text-3xl font-bold underline">Hello World!</h1>;
+  return (
+    <div className="flex flex-nowrap">
+      <div className="text-3xl">sidebar</div>
+      <div>main</div>
+    </div>
+  );
 }
 
 export default App;
