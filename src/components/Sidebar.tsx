@@ -1,3 +1,3 @@
 export default function Sidebar() {
-  return <div className="flex-auto">Sidebar!</div>;
+  return <section className="w-20 h-20 ml-10 mt-10">Sidebar!</section>;
 }
