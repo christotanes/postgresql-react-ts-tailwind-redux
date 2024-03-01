@@ -2,34 +2,42 @@ import { useCreateUserMutation } from "../store";
 import Button from "../components/Button";
 import { useState } from "react";
 
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
 export default function LoginPage() {
   const [createUser, { isLoading, isError }] = useCreateUserMutation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formState, setFormState] = useState<LoginRequest>({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = async (event: React.MouseEvent) => {
+  function handleChange({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) {
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
+  }
+
+  async function handleSubmit(event: React.MouseEvent) {
+    // can delete preventDefault once useNavigate is set up
     event.preventDefault();
     try {
-      const user = {
-        email,
-        password,
-      };
-      const res = await createUser(user).unwrap();
-      if (res) {
-        localStorage.setItem("token", res?.access);
-        console.log(res);
+      const user = await createUser(formState).unwrap();
+      if (user) {
+        localStorage.setItem("token", user?.access);
+        console.log(user);
       }
-      setEmail("");
-      setPassword("");
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   if (isLoading) {
     return <div>Fething login credentials...</div>;
   } else if (isError) {
-    return <div>Error loggin in...</div>;
+    return <div>Error logging in...</div>;
   }
 
   return (
@@ -40,18 +48,18 @@ export default function LoginPage() {
           <label>Email:</label>
           <input
             className="border border-slate-700 mb-2 rounded pl-2"
-            value={email}
+            value={formState.email}
             type="email"
             placeholder="Enter your Email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
           />
           <label>Password:</label>
           <input
             className="border border-slate-700 mb-2 rounded pl-2"
-            value={password}
+            value={formState.password}
             type="password"
             placeholder="Enter your Password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
           />
           <Button rounded primary onClick={(event) => handleSubmit(event)}>
             Login
