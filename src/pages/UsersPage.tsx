@@ -1,5 +1,17 @@
 import { useGetUsersQuery } from "../store";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+
+// start of useAuth hook
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/authSlice";
+
+const useAuth = () => {
+  const user = useSelector(selectCurrentUser);
+  console.log(user);
+  return useMemo(() => ({ user }), [user]);
+};
+// end of useAuth hook
 
 interface User {
   id: number;
@@ -12,6 +24,7 @@ interface User {
 }
 
 export default function UsersPage() {
+  const auth = useAuth();
   const { data, isFetching, error } = useGetUsersQuery();
 
   if (isFetching) {
@@ -30,6 +43,10 @@ export default function UsersPage() {
       </div>
     );
   });
-
-  return <div className="mt-10 ml-10">{renderedUsers}</div>;
+  console.log(auth);
+  return auth.user ? (
+    <div className="mt-10 ml-10">{renderedUsers}</div>
+  ) : (
+    <Navigate to="/login" />
+  );
 }

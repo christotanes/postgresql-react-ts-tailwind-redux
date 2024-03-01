@@ -1,6 +1,9 @@
-import { useCreateUserMutation } from "../store";
-import Button from "../components/Button";
+import { useLoginUserMutation } from "../store";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/authSlice";
 import { useState } from "react";
+
+import Button from "../components/Button";
 
 interface LoginRequest {
   email: string;
@@ -8,11 +11,12 @@ interface LoginRequest {
 }
 
 export default function LoginPage() {
-  const [createUser, { isLoading, isError }] = useCreateUserMutation();
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
   const [formState, setFormState] = useState<LoginRequest>({
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
 
   function handleChange({
     target: { name, value },
@@ -23,12 +27,11 @@ export default function LoginPage() {
   async function handleSubmit(event: React.MouseEvent) {
     // can delete preventDefault once useNavigate is set up
     event.preventDefault();
+    console.log(formState);
     try {
-      const user = await createUser(formState).unwrap();
-      if (user) {
-        localStorage.setItem("token", user?.access);
-        console.log(user);
-      }
+      const user = await loginUser(formState).unwrap();
+      dispatch(setCredentials(user));
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
@@ -48,7 +51,7 @@ export default function LoginPage() {
           <label>Email:</label>
           <input
             className="border border-slate-700 mb-2 rounded pl-2"
-            value={formState.email}
+            name="email"
             type="email"
             placeholder="Enter your Email"
             onChange={handleChange}
@@ -56,7 +59,7 @@ export default function LoginPage() {
           <label>Password:</label>
           <input
             className="border border-slate-700 mb-2 rounded pl-2"
-            value={formState.password}
+            name="password"
             type="password"
             placeholder="Enter your Password"
             onChange={handleChange}

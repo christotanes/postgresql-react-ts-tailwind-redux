@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../../store";
 // import { faker } from "@faker-js/faker";
 
 interface User {
@@ -11,8 +12,9 @@ interface User {
   is_admin: boolean;
 }
 
-interface CreateUserResponse {
-  access: string;
+interface LoginUserResponse {
+  user: string;
+  token: string;
 }
 
 type UsersResponse = User[];
@@ -21,6 +23,13 @@ export const userApi = createApi({
   reducerPath: "users",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (build) => ({
     getUsers: build.query<UsersResponse, void>({
@@ -32,16 +41,16 @@ export const userApi = createApi({
         return res;
       },
     }),
-    createUser: build.mutation({
-      query: (user) => ({
+    loginUser: build.mutation({
+      query: (credentials) => ({
         url: `/users/login`,
         method: "POST",
-        body: user,
+        body: credentials,
       }),
-      transformResponse: (res: CreateUserResponse) => {
+      transformResponse: (res: LoginUserResponse) => {
         return res;
       },
     }),
   }),
 });
-export const { useGetUsersQuery, useCreateUserMutation } = userApi;
+export const { useGetUsersQuery, useLoginUserMutation } = userApi;
