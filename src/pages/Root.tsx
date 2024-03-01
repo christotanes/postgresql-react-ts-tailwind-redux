@@ -6,7 +6,7 @@ export default function Root() {
   return (
     <div className="container mx-auto">
       <Header />
-      <div className="flex">
+      <div className="flex flex-col">
         <Sidebar />
         <Outlet />
       </div>

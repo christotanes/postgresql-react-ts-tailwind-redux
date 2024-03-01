@@ -9,10 +9,9 @@ export default function Sidebar() {
     { label: "Logout", path: "/" },
   ];
 
-  const activeClasses =
-    "text-blue-500 pl-3 font-bold border-l-cyan-900 border-l-2";
+  const activeClasses = "text-blue-500 font-bold border-b-cyan-900 border-b-2";
 
-  const classes = "text-blue-500 pl-2 border-l hover:border-l-cyan-500";
+  const classes = "text-blue-500 border-b hover:border-b-cyan-500";
 
   const handleClick = (label: string) => {
     setActiveIndex(label);
@@ -34,8 +33,6 @@ export default function Sidebar() {
   });
 
   return (
-    <section className="flex flex-col h-screen mx-10 mt-10">
-      {renderedLinks}
-    </section>
+    <section className="flex justify-between m-10">{renderedLinks}</section>
   );
 }
