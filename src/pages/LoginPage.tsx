@@ -14,9 +14,11 @@ export default function LoginPage() {
         email,
         password,
       };
-      console.log(user);
       const res = await createUser(user).unwrap();
-      console.log(res);
+      if (res) {
+        localStorage.setItem("token", res?.access);
+        console.log(res);
+      }
       setEmail("");
       setPassword("");
     } catch (err) {

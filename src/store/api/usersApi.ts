@@ -12,7 +12,7 @@ interface User {
 }
 
 interface CreateUserResponse {
-  data: { access: string | null };
+  access: string;
 }
 
 type UsersResponse = User[];
