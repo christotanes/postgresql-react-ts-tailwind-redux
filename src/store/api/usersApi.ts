@@ -28,6 +28,13 @@ export const userApi = createApi({
         return rawResponse;
       },
     }),
+    createUser: build.mutation({
+      query: (user) => ({
+        url: `/users/login`,
+        method: "POST",
+        body: user,
+      }),
+    }),
   }),
 });
-export const { useGetUsersQuery } = userApi;
+export const { useGetUsersQuery, useCreateUserMutation } = userApi;

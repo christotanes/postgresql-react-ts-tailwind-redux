@@ -19,7 +19,7 @@ export default function UsersPage() {
   } else if (error) {
     return <div>Error fetching data...</div>;
   }
-
+  console.log(data);
   const renderedUsers = data?.map((user: User) => {
     return (
       <div key={user.id} className="my-3">
