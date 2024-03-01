@@ -3,25 +3,32 @@ import Button from "../components/Button";
 import { useState } from "react";
 
 export default function LoginPage() {
-  const [createUser, isLoading] = useCreateUserMutation();
+  const [createUser, { isLoading, isError }] = useCreateUserMutation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event: React.MouseEvent) => {
     event.preventDefault();
-    console.log(isLoading);
-    const user = {
-      email,
-      password,
-    };
-    console.log(user);
-    const res = await createUser(user);
-    const data = await JSON.stringify(res);
-    console.log(data);
-    console.log(isLoading);
-    setEmail("");
-    setPassword("");
+    try {
+      const user = {
+        email,
+        password,
+      };
+      console.log(user);
+      const res = await createUser(user).unwrap();
+      console.log(res);
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  if (isLoading) {
+    return <div>Fething login credentials...</div>;
+  } else if (isError) {
+    return <div>Error loggin in...</div>;
+  }
 
   return (
     <div className="w-full flex align-middle justify-items-center">

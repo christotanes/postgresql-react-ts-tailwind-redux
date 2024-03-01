@@ -11,6 +11,10 @@ interface User {
   is_admin: boolean;
 }
 
+interface CreateUserResponse {
+  data: { access: string | null };
+}
+
 type UsersResponse = User[];
 
 export const userApi = createApi({
@@ -24,8 +28,8 @@ export const userApi = createApi({
         url: `/users`,
         method: "GET",
       }),
-      transformResponse: (rawResponse: UsersResponse) => {
-        return rawResponse;
+      transformResponse: (res: UsersResponse) => {
+        return res;
       },
     }),
     createUser: build.mutation({
@@ -34,6 +38,9 @@ export const userApi = createApi({
         method: "POST",
         body: user,
       }),
+      transformResponse: (res: CreateUserResponse) => {
+        return res;
+      },
     }),
   }),
 });
