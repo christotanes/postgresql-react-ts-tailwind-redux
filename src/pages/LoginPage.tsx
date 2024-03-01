@@ -1,7 +1,8 @@
 import Button from "../components/Button";
 
 export default function LoginPage() {
-  // const handleClick = () => {};
+  const handleSubmit = (event: React.MouseEvent) => {};
+
   return (
     <div className="w-full flex align-middle justify-items-center">
       <div className="mx-auto border-1 border-slate-200 p-5 rounded shadow-lg">
@@ -19,7 +20,7 @@ export default function LoginPage() {
             type="password"
             placeholder="Enter your Password"
           />
-          <Button rounded primary>
+          <Button rounded primary onClick={(event) => handleSubmit(event)}>
             Login
           </Button>
         </form>

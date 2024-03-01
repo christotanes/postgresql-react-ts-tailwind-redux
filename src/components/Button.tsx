@@ -10,6 +10,8 @@ type ChildProps = {
   danger?: boolean;
   rounded?: boolean;
   outline?: boolean;
+  rest?: string;
+  onClick?: (event: React.MouseEvent) => void;
 };
 
 export default function Button({
@@ -21,6 +23,7 @@ export default function Button({
   danger,
   rounded,
   outline,
+  onClick,
   ...rest
 }: ChildProps) {
   const classes = twMerge(
@@ -41,7 +44,7 @@ export default function Button({
   );
 
   return (
-    <button {...rest} className={classes}>
+    <button {...rest} className={classes} onClick={onClick}>
       {children}
     </button>
   );
