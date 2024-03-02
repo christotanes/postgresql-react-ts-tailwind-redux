@@ -1,4 +1,4 @@
-import type { InputProps } from "../util/types";
+import type { InputProps } from "../util/userTypes";
 
 export default function Input({
   name,

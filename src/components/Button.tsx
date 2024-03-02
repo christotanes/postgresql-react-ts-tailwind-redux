@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
-import type { ButtonChildProps } from "../util/types";
+import type { ButtonChildProps } from "../util/userTypes";
 
 export default function Button({
   children,

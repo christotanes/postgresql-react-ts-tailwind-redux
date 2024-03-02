@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRegisterUserMutation } from "../store";
 import RegisterForm from "../components/RegisterForm";
-import type { UserRegister } from "../util/types";
+import type { UserRegister } from "../util/userTypes";
 
 //DEV
 import { faker } from "@faker-js/faker";

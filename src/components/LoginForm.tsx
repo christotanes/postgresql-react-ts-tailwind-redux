@@ -1,6 +1,6 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { LoginFormProps } from "../util/types";
+import { LoginFormProps } from "../util/userTypes";
 
 export default function LoginForm({
   formState,

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { RootState } from "../../store";
+import type { ProductsGetResponse } from "../../util/productTypes";
 
 export const productsApi = createApi({
   reducerPath: "products",
@@ -14,11 +15,14 @@ export const productsApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getProducts: build.query({
+    getProducts: build.query<ProductsGetResponse, void>({
       query: () => ({
         url: "/products",
         method: "GET",
       }),
+      transformResponse: (res: ProductsGetResponse) => {
+        return res;
+      },
     }),
   }),
 });

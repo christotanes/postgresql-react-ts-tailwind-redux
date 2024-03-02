@@ -1,7 +1,7 @@
 import { useGetUsersQuery } from "../store";
 import { Link, Navigate } from "react-router-dom";
 import useAuth from "../util/useAuthHook";
-import type { UserGetRequest } from "../util/types";
+import type { UserGetRequest } from "../util/userTypes";
 
 export default function UsersPage() {
   const auth = useAuth();

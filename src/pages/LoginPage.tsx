@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/authSlice";
 import React, { useState } from "react";
 
-import type { LoginRequest } from "../util/types";
+import type { LoginRequest } from "../util/userTypes";
 import LoginForm from "../components/LoginForm";
 
 export default function LoginPage() {

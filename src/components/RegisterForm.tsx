@@ -1,6 +1,6 @@
 import Input from "./Input";
 import Button from "./Button";
-import type { RegisterFormProps } from "../util/types";
+import type { RegisterFormProps } from "../util/userTypes";
 
 export default function RegisterForm({
   registerForm,
