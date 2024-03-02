@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../store";
 import type { ProductsGetResponse } from "../../util/productTypes";
 
@@ -20,9 +20,6 @@ export const productsApi = createApi({
         url: "/products",
         method: "GET",
       }),
-      transformResponse: (res: ProductsGetResponse) => {
-        return res;
-      },
     }),
   }),
 });

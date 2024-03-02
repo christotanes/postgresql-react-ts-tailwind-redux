@@ -1,9 +1,9 @@
 import { useGetProductsQuery } from "../store";
+import type { ProductsGetResponse } from "../util/productTypes";
 
 export default function HomePage() {
-  const { products, response } = useGetProductsQuery();
+  const { data, isFetching, error } = useGetProductsQuery();
 
-  console.log(products);
-  console.log(response);
+  console.log(data);
   return <div>HomePage</div>;
 }
