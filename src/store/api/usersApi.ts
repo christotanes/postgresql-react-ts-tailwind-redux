@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../store";
 import type { LoginUserResponse, UsersResponse } from "../../util/types";
 
-export const userApi = createApi({
+export const usersApi = createApi({
   reducerPath: "users",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
@@ -47,4 +47,4 @@ export const {
   useGetUsersQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
-} = userApi;
+} = usersApi;

@@ -1,7 +1,7 @@
 import { useGetUsersQuery } from "../store";
 import { Link, Navigate } from "react-router-dom";
 import useAuth from "../util/useAuthHook";
-import type { User } from "../util/types";
+import type { UserGetRequest } from "../util/types";
 
 export default function UsersPage() {
   const auth = useAuth();
@@ -13,7 +13,7 @@ export default function UsersPage() {
     return <div>Error fetching data...</div>;
   }
 
-  const renderedUsers = data?.map((user: User) => {
+  const renderedUsers = data?.map((user: UserGetRequest) => {
     return (
       <div key={user.id} className="my-3">
         Username:
@@ -23,7 +23,6 @@ export default function UsersPage() {
       </div>
     );
   });
-  console.log(auth);
   return auth.user && auth.user.isAdmin ? (
     <div className="mt-10 ml-10">{renderedUsers}</div>
   ) : (

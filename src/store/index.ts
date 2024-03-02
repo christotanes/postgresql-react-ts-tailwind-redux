@@ -1,15 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { userApi } from "./api/usersApi";
+import { usersApi } from "./api/usersApi";
+import { productsApi } from "./api/productsApi";
 import authSlice from "./authSlice";
 
 export const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(userApi.middleware);
+    return getDefaultMiddleware()
+      .concat(usersApi.middleware)
+      .concat(productsApi.middleware);
   },
 });
 
@@ -22,3 +26,4 @@ export {
   useLoginUserMutation,
   useRegisterUserMutation,
 } from "./api/usersApi";
+export { useGetProductsQuery } from "./api/productsApi";
