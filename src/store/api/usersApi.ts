@@ -34,6 +34,11 @@ export const userApi = createApi({
         return res;
       },
     }),
+    // registerUser: build.mutation({
+    //   query: (user) => ({
+    //     url: `/users/`
+    //   })
+    // })
   }),
 });
 export const { useGetUsersQuery, useLoginUserMutation } = userApi;

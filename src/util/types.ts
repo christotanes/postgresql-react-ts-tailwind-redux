@@ -1,16 +1,24 @@
 import { ReactPropTypes, ReactNode } from "react";
 
 export type User = {
-  id: number;
   username: string;
   email: string;
   full_name: string;
-  contact_number: number;
-  created_at: string;
-  is_admin: boolean;
+  contact_number: string;
 };
 
-export type UsersResponse = User[];
+export interface UserGetRequest extends User {
+  id: number;
+  created_at: string;
+  is_admin: boolean;
+}
+
+export interface UserRegister extends User {
+  password: string;
+  confirmPassword: string;
+}
+
+export type UsersResponse = UserGetRequest[];
 
 export type LoginUserResponse = {
   user: {
