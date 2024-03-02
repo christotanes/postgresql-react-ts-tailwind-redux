@@ -17,4 +17,8 @@ setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export { useGetUsersQuery, useLoginUserMutation } from "./api/usersApi";
+export {
+  useGetUsersQuery,
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from "./api/usersApi";

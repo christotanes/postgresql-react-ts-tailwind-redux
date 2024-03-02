@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRegisterUserMutation } from "../store";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import type { UserRegister } from "../util/types";
@@ -6,13 +7,15 @@ import type { UserRegister } from "../util/types";
 //DEV
 import { faker } from "@faker-js/faker";
 
-const randomUsername = faker.word.adjective(100);
-const randomName = faker.person.fullName();
-const randomEmail = faker.internet.email();
-const randomContactNumber = faker.phone.number();
+let randomUsername = faker.word.adjective(100);
+let randomName = faker.person.fullName();
+let randomEmail = faker.internet.email();
+let randomContactNumber = faker.phone.number();
 //DEV END
 
 export default function RegisterPage() {
+  const [registerUser, response] = useRegisterUserMutation();
+
   const [registerForm, setRegisterForm] = useState<UserRegister>({
     username: randomUsername,
     email: randomEmail,
@@ -28,8 +31,36 @@ export default function RegisterPage() {
     setRegisterForm((prevState) => ({ ...prevState, [name]: value }));
   }
 
+  function handleClear(event: React.MouseEvent) {
+    event.preventDefault();
+    setRegisterForm((prevState) => ({
+      ...prevState,
+
+      //CHANGE on PROD
+      username: (randomUsername = faker.word.adjective(100)),
+      email: (randomEmail = faker.internet.email()),
+      password: randomUsername + "password",
+      confirmPassword: "",
+      full_name: (randomName = faker.person.fullName()),
+      contact_number: (randomContactNumber = faker.phone.number()),
+    }));
+  }
+
   async function handleSubmit(event: React.MouseEvent) {
     event.preventDefault();
+    try {
+      const res = await registerUser(registerForm);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  if (response.isLoading) {
+    return <div>Creating User...</div>;
+  } else if (response.isError) {
+    console.log(response);
+    return <div>Error Creating User... </div>;
   }
 
   return (
@@ -92,12 +123,12 @@ export default function RegisterPage() {
         >
           Contact Number:
         </Input>
-        <div className="border-t-2 text-center mt-3 pt-5 border-t-cyan-500">
+        <div className="border-t-2 text-center mt-3 pt-5 border-t-cyan-500 flex justify-evenly gap-3">
           <Button rounded primary onClick={(event) => handleSubmit(event)}>
             Register
           </Button>
-          <Button rounded danger>
-            Cancel
+          <Button rounded danger onClick={(event) => handleClear(event)}>
+            Cancel / Random
           </Button>
         </div>
       </div>
