@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ReactPropTypes } from "react";
 import { twMerge } from "tailwind-merge";
 
 type ChildProps = {
@@ -10,7 +11,7 @@ type ChildProps = {
   danger?: boolean;
   rounded?: boolean;
   outline?: boolean;
-  rest?: string;
+  rest?: ReactPropTypes;
   onClick?: (event: React.MouseEvent) => void;
 };
 
@@ -27,7 +28,7 @@ export default function Button({
   ...rest
 }: ChildProps) {
   const classes = twMerge(
-    classNames(rest, "flex items-center px-2 py-1 border", {
+    classNames("px-2 py-1 border", {
       "border-blue-500 bg-blue-500 text-white": primary,
       "border-gray-900 bg-gray-900 text-white": secondary,
       "border-green-500 bg-green-500 text-white": success,

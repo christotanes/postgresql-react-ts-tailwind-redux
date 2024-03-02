@@ -33,6 +33,8 @@ export default function Sidebar() {
   });
 
   return (
-    <section className="flex justify-between m-10">{renderedLinks}</section>
+    <section className="flex justify-center gap-5 m-10">
+      {renderedLinks}
+    </section>
   );
 }
