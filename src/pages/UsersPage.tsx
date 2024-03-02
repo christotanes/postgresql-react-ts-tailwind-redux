@@ -1,27 +1,7 @@
 import { useGetUsersQuery } from "../store";
 import { Link, Navigate } from "react-router-dom";
-
-// start of useAuth hook
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../store/authSlice";
-
-const useAuth = () => {
-  const user = useSelector(selectCurrentUser);
-  console.log(user);
-  return useMemo(() => ({ user }), [user]);
-};
-// end of useAuth hook
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  full_name: string;
-  contact_number: number;
-  created_at: string;
-  is_admin: boolean;
-}
+import useAuth from "../util/useAuthHook";
+import type { User } from "../util/types";
 
 export default function UsersPage() {
   const auth = useAuth();
@@ -32,7 +12,7 @@ export default function UsersPage() {
   } else if (error) {
     return <div>Error fetching data...</div>;
   }
-  console.log(data);
+
   const renderedUsers = data?.map((user: User) => {
     return (
       <div key={user.id} className="my-3">

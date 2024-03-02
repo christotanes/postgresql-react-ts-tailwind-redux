@@ -1,14 +1,4 @@
-import { ReactNode } from "react";
-
-type InputProps = {
-  name?: string;
-  type: string;
-  placeholder: string;
-  value?: string | number | readonly string[] | undefined;
-  children?: ReactNode;
-  rest?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import type { InputProps } from "../util/types";
 
 export default function Input({
   name,

@@ -1,27 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../store";
-// import { faker } from "@faker-js/faker";
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  full_name: string;
-  contact_number: number;
-  created_at: string;
-  is_admin: boolean;
-}
-
-interface LoginUserResponse {
-  user: {
-    id: number;
-    username: string;
-    isAdmin: boolean;
-  };
-  token: string;
-}
-
-type UsersResponse = User[];
+import type { LoginUserResponse, UsersResponse } from "../../util/types";
 
 export const userApi = createApi({
   reducerPath: "users",

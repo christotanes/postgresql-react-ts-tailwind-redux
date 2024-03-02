@@ -1,19 +1,6 @@
 import classNames from "classnames";
-import { ReactPropTypes } from "react";
 import { twMerge } from "tailwind-merge";
-
-type ChildProps = {
-  children: string;
-  primary?: boolean;
-  secondary?: boolean;
-  success?: boolean;
-  warning?: boolean;
-  danger?: boolean;
-  rounded?: boolean;
-  outline?: boolean;
-  rest?: ReactPropTypes;
-  onClick?: (event: React.MouseEvent) => void;
-};
+import type { ButtonChildProps } from "../util/types";
 
 export default function Button({
   children,
@@ -26,7 +13,7 @@ export default function Button({
   outline,
   onClick,
   ...rest
-}: ChildProps) {
+}: ButtonChildProps) {
   const classes = twMerge(
     classNames("px-2 py-1 border", {
       "border-blue-500 bg-blue-500 text-white": primary,

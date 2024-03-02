@@ -9,9 +9,11 @@ export default function Sidebar() {
     { label: "Logout", path: "/" },
   ];
 
-  const activeClasses = "text-blue-500 font-bold border-b-cyan-900 border-b-2";
+  const activeClasses =
+    "text-blue-500 font-bold border-b-2 border-b-cyan-900 md:border-l-cyan-700 md:border-l-2 md:border-b-0 md:pl-2";
 
-  const classes = "text-blue-500 border-b hover:border-b-cyan-500";
+  const classes =
+    "text-blue-500 border-b hover:border-b-cyan-500 md:border-b-0 md:border-l md:hover:border-l-cyan-500 md:pl-1";
 
   const handleClick = (label: string) => {
     setActiveIndex(label);
@@ -33,7 +35,7 @@ export default function Sidebar() {
   });
 
   return (
-    <section className="flex justify-center gap-5 m-10">
+    <section className="flex md:flex-col justify-center md:justify-normal gap-5 md:gap-2 m-10">
       {renderedLinks}
     </section>
   );
