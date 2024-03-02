@@ -43,12 +43,19 @@ export type AuthState = {
   token: string | null;
 };
 
-export type LoginFormProps = {
-  formState: LoginRequest;
+type FormProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent) => void;
   handleClear: (event: React.MouseEvent) => void;
 };
+
+export interface LoginFormProps extends FormProps {
+  formState: LoginRequest;
+}
+
+export interface RegisterFormProps extends FormProps {
+  registerForm: UserRegister;
+}
 
 export type InputProps = {
   name?: string;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useRegisterUserMutation } from "../store";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import RegisterForm from "../components/RegisterForm";
 import type { UserRegister } from "../util/types";
 
 //DEV
@@ -59,7 +58,6 @@ export default function RegisterPage() {
   if (response.isLoading) {
     return <div>Creating User...</div>;
   } else if (response.isError) {
-    console.log(response);
     return <div>Error Creating User... </div>;
   }
 
@@ -69,68 +67,12 @@ export default function RegisterPage() {
         <div className="border-b-2 text-center mb-3 pb-2 border-b-cyan-500">
           <h2>User Registration</h2>
         </div>
-        <Input
-          name="username"
-          type="text"
-          value={registerForm.username}
-          placeholder="Enter Username"
-          onChange={handleChange}
-        >
-          Username:
-        </Input>
-        <Input
-          name="email"
-          type="email"
-          value={registerForm.email}
-          placeholder="Enter Email"
-          onChange={handleChange}
-        >
-          Email:
-        </Input>
-        <Input
-          name="password"
-          type="password"
-          value={registerForm.password}
-          placeholder="Enter Password"
-          onChange={handleChange}
-        >
-          Password:
-        </Input>
-        <Input
-          name="confirmPassword"
-          type="password"
-          value={registerForm.confirmPassword}
-          placeholder="Please Confirm Password"
-          onChange={handleChange}
-        >
-          Confirm Password:
-        </Input>
-        <Input
-          name="full_name"
-          type="text"
-          value={registerForm.full_name}
-          placeholder="Enter Full Name"
-          onChange={handleChange}
-        >
-          Full Name:
-        </Input>
-        <Input
-          name="contact_number"
-          type="text"
-          value={registerForm.contact_number}
-          placeholder="Enter contact_number"
-          onChange={handleChange}
-        >
-          Contact Number:
-        </Input>
-        <div className="border-t-2 text-center mt-3 pt-5 border-t-cyan-500 flex justify-evenly gap-3">
-          <Button rounded primary onClick={(event) => handleSubmit(event)}>
-            Register
-          </Button>
-          <Button rounded danger onClick={(event) => handleClear(event)}>
-            Cancel / Random
-          </Button>
-        </div>
+        <RegisterForm
+          registerForm={registerForm}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleClear={handleClear}
+        />
       </div>
     </section>
   );
