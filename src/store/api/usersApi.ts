@@ -13,7 +13,11 @@ interface User {
 }
 
 interface LoginUserResponse {
-  user: string;
+  user: {
+    id: number;
+    username: string;
+    isAdmin: boolean;
+  };
   token: string;
 }
 

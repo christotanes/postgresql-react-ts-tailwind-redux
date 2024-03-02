@@ -44,7 +44,7 @@ export default function UsersPage() {
     );
   });
   console.log(auth);
-  return auth.user ? (
+  return auth.user && auth.user.isAdmin ? (
     <div className="mt-10 ml-10">{renderedUsers}</div>
   ) : (
     <Navigate to="/login" />
